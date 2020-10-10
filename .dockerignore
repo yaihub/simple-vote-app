@@ -1,0 +1,8 @@
+.github
+.pi
+build
+.git
+readme.md
+.gitignore
+
+vue/node_modules
