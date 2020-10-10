@@ -1,20 +1,31 @@
 <template>
   <div>
-    <div v-for="poll in polls">
-      <h2 type="h2">Poll {{ poll.title }}</h2>
+    <h2>List of Polls</h2>
+    <div class="item" v-for="poll in polls">
+      <h4>Poll {{ poll.title }}</h4>
       <div v-for="option in poll.options">
-        <input
+        <!-- <input
           type="radio"
           @click="submit(poll.id, option)"
           :name="poll.id"
           :value="option"
         />
-        <label>{{option}}</label>
+        <label>{{option}}</label> -->
+        <button @click="submit(poll.id, option)">Vote {{option}}</button>
       </div>
-      <!-- <h4 type="subtitle">Results: {{ results(poll.id) }}</h4> -->
     </div>
   </div>
 </template>
+
+<style scoped>
+.item {
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+  margin-bottom: 1rem;
+  padding: 1rem;
+  border-radius: 0.5rem;
+  overflow: hidden;
+}
+</style>
 
 <script>
 export default {
@@ -32,6 +43,7 @@ export default {
     }
   },
   created() {
+    this.$store.dispatch("cosmos/entityFetch", { type: "poll" });
     this.$store.dispatch("cosmos/entityFetch", { type: "vote" });
   },
   methods: {
