@@ -11,7 +11,7 @@ import (
 // CreateVote creates a vote
 func (k Keeper) CreateVote(ctx sdk.Context, vote types.Vote) {
 	store := ctx.KVStore(k.storeKey)
-	key := []byte(types.VotePrefix + vote.PollID + "-" + string(vote.Creator))
+	key := []byte(types.VotePrefix + vote.ID)
 	value := k.cdc.MustMarshalBinaryLengthPrefixed(vote)
 	store.Set(key, value)
 }
